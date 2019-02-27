@@ -1,0 +1,158 @@
+<!DOCTYPE >
+<html>
+    <head>
+        <meta charset = "UTF-8">
+        <title>Flex Panels</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+    </head>
+    <body>
+        <style>
+            html {
+                font-size: 20px;
+                font-weight: 200;
+                box-sizing: border-box;
+                background: #ffc600;
+                font-family: 'helvetica neue';
+
+            }
+
+            body {
+                margin: 0;
+            }
+
+            *,*:before, *:after {
+                box-sizing: inherit;
+            }
+
+            .panels {
+                display: flex;
+                min-height: 100vh;
+                overflow: hidden;
+
+                
+            }
+
+            .panel {
+                background: #6B0F9C;
+                color: #fff;
+                font-size: 20px;
+                flex: 1; /*--这个是继承父元素的，自动填充屏宽*/
+                background-size: cover;
+                background-position: center;
+                box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: font-size 0.7s cubic-bezier(0.61,-0.19,0.7,-0.11), flex 0.7s cubic-bezier(0.61,-0.19,0.7,-0.11), background 0.2s;
+            }
+
+            .panel div {
+                /* text-transform: uppercase; */
+                font-size: 2em;
+                white-space: nowrap;
+            }
+
+
+
+            .panel > * {
+                width: 100%;
+                flex: 1 0 auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: transform 0.5s;
+            }
+
+            .panel > *:first-child {
+                transform: translateY(-100%);
+            }
+            .panel > *:last-child {
+                transform: translateY(100%);
+            }
+            .panel.open-active > *:first-child {
+                transform: translateY(0);
+            }
+            .panel.open-active > *:last-child {
+                transform: translateY(0);
+            }
+
+            .panel div:nth-child(2) {
+                font-size: 2em;
+            }
+
+            .panel.open {
+                flex: 5;
+                font-size: 1em;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .panel p {
+                    font-size: 1em;
+                }
+            }
+            
+            .panel1 {
+                background-image: url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500);
+            }
+            .panel2 {
+                background-image: url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500);
+            }
+            .panel3 {
+                background-image: url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d);
+            }
+            .panel4 {
+                background-image: url(https://source.unsplash.com/ITjiVXcwVng/1500x1500);
+            }
+            .panel5 {
+                background-image: url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500);
+            }
+
+        </style>
+        <div class = "panels">
+            <div class = "panel panel1">
+                <div class = "txt1">HEY</div>
+                <div class = "txt2">LET'S</div>
+                <div class = "txt3">DANCE</div>
+            </div>
+            <div class = "panel panel2">
+                <div class = "txt1">GIVE</div>
+                <div class = "txt2">TAKE</div>
+                <div class = "txt3">RECEIVE</div>
+            </div>
+            <div class = "panel panel3">
+                <div class = "txt1">EXPERIENCE</div>
+                <div class = "txt2">IT</div>
+                <div class = "txt3">TODAY</div>
+            </div>
+            <div class = "panel panel4">
+                <div class = "txt1">GIVE</div>
+                <div class = "txt2">ALL</div>
+                <div class = "txt3">YOU CAN</div>
+            </div>
+            <div class = "panel panel5">
+                <div class = "txt1">LIFE</div>
+                <div class = "txt2">IN</div>
+                <div class = "txt3">MOTION</div>
+            </div>            
+        </div>
+        
+
+        <script>
+            const panels = document.querySelectorAll('.panel');
+            function toggleOpen() {
+                this.classList.toggle('open');
+            }
+            function toggleActive(e){
+                if(e.propertyName.includes('flex')){
+                    this.classList.toggle('open-active');
+                }
+            }
+
+            panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+            panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+
+        </script>
+    </body>
+
+</html>

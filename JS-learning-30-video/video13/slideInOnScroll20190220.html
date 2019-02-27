@@ -1,0 +1,140 @@
+<!DOCTYPE >
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Picture slides with scrolling</title>
+    </head>
+    <body>
+        <div class = 'site-wrap'>
+            <h1>Slide in on Scroll</h1>
+            <p>Cornify is the #1 unicorn and rainbow service worldwide, spreading sparkly happiness around the world.Cornify wishes you sparkly happiness forever!!!"The internet is done, we can all go home and congratulate ourselves on a job well done."Clay Shirky</p>
+            <p>Stonehenge rocks Wales, “What’s really exciting about these discoveries”.
+            Scientists have discovered the exact location of the quarries where dozens of Stonehenge’s massive stones came from, a new study says.
+            In addition to pinpointing the location of the quarries – in western Wales, about 290 kilometres away from Stonehenge – archaeologists also now say they know how and when the stones were quarried.
+            “What’s really exciting about these discoveries is that they take us a step closer to unlocking Stonehenge’s greatest mystery – why its stones came from so far away,” said study lead author Mike Parker Pearson of University College London.</p>
+            <img src='https://tse1-mm.cn.bing.net/th?id=OIP.SjSzGlGmthaTNt6yCIjwvQAAAA&w=86&h=100&c=8&rs=1&qlt=90&dpr=2&pid=3.1&rm=2' class="align-left slide-in">
+            <p>The stones were quarried so far away from Stonehenge because they were relatively “easy” to remove, Pearson theorises, since they were already natural vertical pillars: Using wood mallets, quarry workers only had to bash wedges into the ready-made joints between the pillars to break them apart, according to the study.Hypertext Markup Language is the standard markup language for creating web pages and web applications. With Cascading Style Sheets and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web. Web browsers receive HTML documents from a web server or from local storage and render the documents into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document. HTML elements </p>
+            <img src='https://tse1-mm.cn.bing.net/th?id=AMMS_3c1fc198e5a4e9e3a978640a6353d910&w=157&h=183&c=8&rs=1&o=5&dpr=2&pid=3.1&rm=2' class="align-right slide-in">
+            <p>Unlike stone quarries in ancient Egypt, where obelisks were carved out of the solid rock, the Welsh quarries were easier to exploit, the study said.Updated: 12/20/2017 by. First developed by Tim Berners-Lee in 1990, HTML is short for HyperText Markup Language. HTML is used to create electronic documents (called pages) that are displayed on the World Wide Web. Each page contains a series of connections to other pages called hyperlinks.HTML is the beginning of everything you need to know to create engaging web pages! Take-Away Skills. You will learn all the common HTML tags used to structure HTML pages, the skeleton of all websites. You will also be able to create HTML tables to present tabular data efficiently.</p>
+            <img src='https://tse1-mm.cn.bing.net/th?id=OIP.r8e2UHqNmbrSiHpwt82SaAHaFN&w=112&h=82&c=8&rs=1&qlt=90&dpr=2&pid=3.1&rm=2' class="align-left slide-in">
+            <p>Thousands of people travel there each year to mark the solstices in summer and winter. Built in several phases from 2900 BC to 1650 BC, the stones have figured in numerous debates, both scholarly and whimsical, over their origins.</p>
+            <p>Happy Valentine’s Day to all you lovebirds out there! Our featured birds today are grey crowned cranes that live in the savannahs and marshlands of east and south Africa. While both males and females of this species will dance to attract a mate, the dancing behavior has been observed all year long, and even in juveniles. Even two males may pose like this, while they size each other up as competition.</p> 
+            <img src='https://tse1-mm.cn.bing.net/th?id=OIP.yiQQ-yCcyHV7IH-Y_vXgQQHaLh&w=86&h=100&c=8&rs=1&qlt=90&dpr=2&pid=3.1&rm=2' class="align-right slide-in">
+            <p>The Apple II series is a family of home computers, one of the first highly successful mass-produced microcomputer products, designed primarily by Steve Wozniak, manufactured by Apple Computer, and launched in 1977 with the original Apple II. In terms of ease of use, features, and expandability, the Apple II was a major advancement over its predecessor, the Apple I, a limited-production bare circuit board computer for electronics hobbyists. Through 1988, a number of models were introduced, with the most popular, the Apple IIe, remaining changed relatively little into the 1990s. A 16-bit model with much more advanced graphics and sound, the Apple IIGS, was added in 1986. While compatible with earlier Apple II systems, the IIGS was in closer competition with the Atari ST and Amiga.</p>
+        </div>
+
+
+        <script>//实现逻辑/流程
+        //1.timeout = undefine
+        //2.执行到callNow =true
+        //3.立即执行func
+        //4.但此时 timeout 由于执行了 setTimeout ，所以timeout=true，20ms延时后执行了 later，此时timeout=null，用于下一次循环执行
+        //5.第二遍仍然立即执行
+
+
+            //用于函数的优化，去抖
+            function debounce(func, wait = 20, immediate = true) {//func为函数作为参数引入
+                var timeout;
+                return function() {//闭包，实现，作用域影响了 timeout 在循环过程中保持上一次的执行结果
+                    var context = this;//this 指向的是func
+                    console.log(this);//
+                    var args = arguments;//arguments 对象 包含函数所有要调用的参数
+                    var later = function(){//函数有什么功能，主要是为了实现timeout=null的功能
+                        timeout = null;
+                        if (!immediate) func.apply(context, args);//apply 实现什么功能,是 context,也就是 this 这个对象调用了 func 这个函数，args 作为参数传入函数
+                    }                                             //***由于immediate被写死了，所以该语句并不会执行，该语句的作用是为了在程序第一次执行时，是否立即执行，还是同样延时wait后再执行***************
+                    var callNow = immediate && !timeout;//判断条件 ，为了使得func立即执行
+                    clearTimeout(timeout);//DOM 自带的方法，是为了取消延时
+                    timeout = setTimeout(later,wait);//DOM 自带的方法，函数本身已实现了在wait 延时后再调用函数later，返回later函数的id值
+                    if (callNow) func.apply(context, args);//***这个应该是函数最后的执行分支2吧，函数出口*******************
+
+                }
+            }
+
+            const slideImages = document.querySelectorAll('.slide-in');
+
+
+            function checkSlide() {
+                slideImages.forEach(slideImage => {
+                    const slideInAt = window.scrollY + window.innerHeight - slideImage.height / 2;
+                    const imageBottom = slideImage.offsetTop + slideImage.height;
+                    const isHalfShown = slideInAt > (slideImage.offsetTop);
+                    const isImagePast = window.scrollY < imageBottom;
+                    if(isHalfShown && isImagePast) {
+                        slideImage.classList.add('active');
+                    } else {
+                        slideImage.classList.remove('active');
+                    }
+
+                });
+
+            }
+            
+            //监听键盘的输入/屏幕的滚动
+            window.addEventListener('scroll', debounce(checkSlide));
+
+
+
+
+
+
+
+
+        </script>
+        <style>
+            html {
+                background: #ffc600;
+                font-family: 'helvetica neue';
+                font-size: 20px;
+                font-weight: 200;
+            }
+
+            body,div {
+                margin: 0;
+            }
+
+            h1 {
+                margin-top: 0;
+            }
+
+            .site-wrap {
+                background: rgb(216, 223, 241);
+                margin: 100px auto;/*居中方式*/
+                max-width: 700px;
+                padding: 40px;
+                text-align: justify;
+                word-break: break-all;
+                width: 620px;
+               
+            }
+
+            .align-left {
+                float: left;
+                margin-right: 20px;
+            }
+
+            .align-right {
+                float: right;
+                margin-left: 20px;
+            }
+
+            .slide-in {
+                opacity: 0;
+                transition: all .5s;
+            }
+
+            .align-left.slide-in {
+                transform: translateX(-30%) scale(0.95);
+            }
+            .align-right.slide-in {
+                transform: translateX(30%) scale(0.95);
+            }
+
+            .slide-in.active {
+                opacity: 1;
+                transform: translateX(0%) scale(1);
+            }
+
+        </style>
+    </body>
+</html>

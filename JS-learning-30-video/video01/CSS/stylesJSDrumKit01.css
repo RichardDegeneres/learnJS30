@@ -1,0 +1,29 @@
+body {
+  background: url(http://i.imgur.com/b9r5sEL.jpg);
+  font-family: PingFangSC, Microsoft YaHei;
+  color: #FFF;
+  padding: 20% 0;
+}
+.keys {
+  display: flex;
+  justify-content: space-around;
+}
+.key {
+  border: 4px solid black;
+  border-radius: 8px;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  transition: all .5s ease;
+}
+kbd {
+  font-size: 60px;
+}
+.txt {
+  color: yellow;
+  font-size: 14px;
+}
+.playing {
+  border-color: yellow;
+  transform: scale(1.5);
+}

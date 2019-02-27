@@ -1,0 +1,54 @@
+<!DOCTYPE >
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>DOM 的事件机制</title>
+    </head>
+    <body>
+        <div class="first">
+            <div class="second">
+                <div class="third">
+                </div>
+            </div>
+        </div>
+
+        <style>
+            body {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            *,*:before,*:after {
+                box-sizing: inherit;
+            }
+            div {
+                width: 100%;
+                padding: 100px;
+            }
+
+            .first{
+                background: thistle;
+            }
+            .second{
+                background: mistyrose;
+            }
+            .third {
+                background: coral;
+            }
+
+        </style>
+
+        <script>
+        const divTags =document.querySelectorAll('div');
+        function func1(e) {
+            e.stopPropagation();
+            console.log(this.classList.value);
+        }
+        divTags.forEach(divTag => divTag.addEventListener('click',func1,{
+            capture:false,
+            once: true//每个 div 只能点击一次
+        }));
+        
+        </script>
+    </body>
+</html>

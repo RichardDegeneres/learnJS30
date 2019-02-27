@@ -1,0 +1,80 @@
+html,body,div,form,p,h1{
+    margin:0;
+    padding:0;
+}
+
+html {
+    box-sizing: border-box;
+    background: #8E24AA;
+    font-size: 10px;
+    background: linear-gradient(45deg,#43a5fa 0%,#478ed1 50%,#0d47a1 100%);
+}
+
+body {
+    margin: 0;
+    font-family: 'Inconsolata', monospace;
+    text-align: center;
+}
+
+*,*:before,*:after {
+    box-sizing: inherit;
+}
+
+.timer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+    .timer__controls {
+        display: flex;
+
+        form {
+            // flex: 1;
+            display: flex;
+            input {
+                flex: 1;
+                border: 0;
+                padding: 2rem;
+            }
+        }
+    }
+    .timer__controls > * {
+        flex: 1;
+    }
+
+    .timer__button {
+        border: none;
+        border-right: 1px solid rgba(0,0,0,.2);
+        border-bottom: 3px solid rgba(0,0,0,.2);
+        cursor: pointer;
+        color: white;
+        font-size: 2rem;
+        background: rgba(0,0,0,.1);
+        padding: 1rem;
+        text-transform: uppercase;
+    }
+
+    .timer__button:hover,.timer__button:focus {
+        background: rgba(0,0,0,.2);
+        outline: 0;
+    }
+
+    .display {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        
+
+        .timer-time-left {
+            color: white;
+            font-weight: 100;
+            font-size: 20rem;
+            text-shadow: 4px 4px 0 rgba(0,0,0,.05);
+        }
+        .timer-end-time {
+            color: white;
+            font-size: 4rem;
+        }
+    }
+}

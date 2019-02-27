@@ -1,0 +1,73 @@
+<!DOCTYPE >
+<html>
+    <head>
+        <meta charSet="UTF-8">
+        <title>HTML5 canvas</title>
+
+    </head>
+    <body>
+        <canvas id ="draw" width="800" height="800"></canvas>
+        <script>
+            const canvas = document.querySelector("#draw");
+            const ctx = canvas.getContext('2d');//获取对象和绘制方法
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvas.strokeStyle = '#BADA55';//笔触颜色
+            ctx.lineJoin ='round';//两条线交叉的形状
+            ctx.lineCap = 'round';//线结束末端的形状
+            ctx.lineWidth = 100;//绘画的线的宽
+
+
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+            let hue = 0;
+            let direction = true;
+
+            function draw(e) {
+                if(!isDrawing) return;
+                console.log(e);
+
+                ctx.strokeStyle = `hsl(${hue},100%,50%)`;//hsl取色器
+
+                ctx.beginPath();
+                ctx.moveTo(lastX,lastY);
+                ctx.lineTo(e.offsetX,e.offsetY);
+                ctx.stroke();//绘制从起点 moveTo 到终点 lineto 的路径的方法调用
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+
+                hue++;
+                if (hue >= 360){
+                    hue = 0;
+                }//循环取色
+
+                if (ctx.lineWidth >=100 || ctx.lineWidth <= 1){//???
+                    direction = !direction;//用于控制线宽的标识变量，无实际意义
+                }//线宽度循环变化
+
+                if(direction){
+                    ctx.lineWidth++;
+                }else {
+                    ctx.lineWidth--;
+                }
+            }
+
+            canvas.addEventListener('mousedown', (e) => {
+                isDrawing =true;
+                [lastX, lastY] = [e.offsetX, e.offsetY];//???
+                console.log(isDrawing);
+            });
+
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', () => isDrawing =false);
+            canvas.addEventListener('mouseout', () => isDrawing =false);
+
+
+        </script>
+        <style>
+            html,body {
+                margin: 0;
+            }
+        </style>
+    </body>
+</html>

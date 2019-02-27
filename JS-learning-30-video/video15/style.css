@@ -1,0 +1,56 @@
+html {
+  background: center no-repeat url(BingWallpaper-2019-02-20.jpg);
+  background-size: cover;
+  min-height: 100vh;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+svg {
+  width: 200px;
+  fill: white;
+  background: #DDD;
+  border-radius: 50%;
+  margin-bottom: 50px;
+}
+.wrapper {
+  padding: 20px;
+  background: #FFF;
+  max-width: 350px;
+  box-shadow: 0 0 0 10px #DDD;
+}
+h2 {
+  font-weight: 200;
+  margin: 0;
+}
+ul {
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  display: flex;
+  padding: 10px 0;
+  list-style: none;
+  text-align: left;
+  border-bottom: 1px #BBB solid;
+  font-weight: 100px;
+}
+ul input {
+  display: none;
+}
+ul input + label:before {
+  content: '⬜️';
+  margin-right: 10px;
+}
+ul input:checked + label:before {
+  content: '🌮';
+}
+form {
+  margin: 20px 0 0 0;
+}
+form input {
+  padding: 10px;
+  border: 1px solid #EEE;
+}

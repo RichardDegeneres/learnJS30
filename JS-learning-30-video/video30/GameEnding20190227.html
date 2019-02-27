@@ -1,0 +1,145 @@
+<!DOCTYPE >
+<html>
+    <head>
+        <meta charset=“UTF-8“>
+        <title>Game Ending</title>
+
+    </head>
+    <body>
+        <h1>Whack A Hole<span class="score">0</span></h1>
+        <button onclick="startGame()">StartGame!</button>
+        <br>
+        <div class="game">
+            <div class="hole hole1">
+                <div class="mole"></div>
+            </div>
+            <div class="hole hole2">
+                <div class="mole"></div>
+            </div>
+            <div class="hole hole3">
+                <div class="mole"></div>
+            </div>
+            <div class="hole hole4">
+                <div class="mole"></div>
+            </div>
+            <div class="hole hole5">
+                <div class="mole"></div>
+            </div>
+            <div class="hole hole6">
+                <div class="mole"></div>
+            </div>
+        </div>
+        <style>
+            html{
+                background: #ffc600;
+                box-sizing: border-box;
+                font-size: 10px;
+            }
+
+            *,*:before,*:after {
+                box-sizing: inherit;
+            }
+            body {
+                width: 800px;
+                margin: 20px auto;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-family: "Amatic SC",cursive;
+            }
+
+            h1 {
+                font-size: 10rem;
+                margin-bottom: 0;
+            }
+            .score {
+                margin: 0 20px;
+            }
+
+            .game {
+                width: 100%;
+                border: 1px solid blueviolet;
+                display: flex;
+                flex-wrap: wrap;
+                text-align: center;
+
+            }
+            .hole {
+                    height: 200px;
+                    margin: 0 auto;
+                    width: 33%;
+                    border: 1px solid rgb(81, 81, 156);
+                    background: url('https://tse2-mm.cn.bing.net/th?id=OIP.51IKTVfv_64gsNrvk3KsdgHaFj&w=226&h=169&c=7&o=5&dpr=2&pid=1.7');
+                    background-size: cover;
+                    position: relative;
+                }
+
+            .mole {
+                background: url('https://tse2-mm.cn.bing.net/th?id=OIP.oYpciTjSt2OAgsSzJp-i2AHaKl&w=137&h=196&c=7&o=5&dpr=2&pid=1.7') center no-repeat;
+                position: absolute;
+                top: 100%;
+                width: 100%;
+                height: 100%;
+                transition: all .4s;
+                display: none;
+            
+            }
+
+            .hole.up .mole {
+                top: 0%;
+                display: block;
+            }
+
+        </style>
+
+        <script>
+            const holes = document.querySelectorAll('.hole');
+            const scoreBoard = document.querySelector('.score');
+            const moles = document.querySelectorAll('.mole');
+            let timeUp = false;
+            let score = 0;
+            function randomTime(min,max) {
+                const time = Math.round(Math.random()*(max-min)+min);
+                console.log(time);
+                return time;
+            }
+
+            function randomHole(holes) {
+                const idx = Math.floor(Math.random()*(holes.length));
+                const hole = holes[idx];
+                console.log(hole);
+                return hole;
+            }
+
+            function peep() {
+                const ptime = randomTime(200,1000);
+                const phole = randomHole(holes);
+                phole.classList.add('up');
+                setTimeout(() => {
+                    phole.classList.remove('up');
+                    if(!timeUp) peep();
+                },ptime);
+            }
+
+            function startGame() {
+                scoreBoard.textContent = 0;
+                timeUp = false;
+                score = 0;
+                peep();
+                setTimeout(() => {timeUp = true;},20000);
+            }
+
+            function bonk(e) {
+                if (!e.isTrusted) return;
+                score++;
+                console.log(this,'-----');
+                this.classList.remove('up');
+                scoreBoard.textContent = score;
+            }
+
+            moles.forEach(mole => mole.addEventListener('click',bonk));
+        </script>
+    </body>
+</html>

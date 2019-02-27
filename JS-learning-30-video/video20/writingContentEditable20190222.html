@@ -1,0 +1,56 @@
+<!DOCTYPE >
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sounds transformed to text</title>
+    </head>
+    <body>
+        <div class="context" contenteditable></div>
+        <style>
+        html{
+            background: #FFc600;
+            font-weight: 200;
+            font-size: 20px;
+        }
+        
+        body {
+            margin: 8px;
+            display: block;
+            padding: 0 auto;
+            
+        }
+
+        .context {
+            background: white;
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 1rem 2rem 1rem 5rem;
+            border-radius: 5px;
+            background-size: 100% 3rem;
+            position: relative;
+            line-height: 3rem;
+            box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+            
+        }
+
+        p {
+            margin: 0 0 3rem;
+        }
+
+        .context::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 30px;
+            bottom: 0;
+            background: white;
+            width: 4px;
+            border: solid 1px;
+            border-color: transparent #efe4e4 ;
+            opacity: 0.5;
+        } 
+        
+        </style>
+    </body>
+</html>

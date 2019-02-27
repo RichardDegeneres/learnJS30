@@ -1,0 +1,36 @@
+<!DOCTYPE >
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Update Css Variable with JS</title>
+        <link rel="stylesheet" href="CSS/styles20190124.css">
+    </head>
+    <body>
+        <h1>Update CSS Variables with <span class="js">JS</span></h1>
+        <div class="nav">
+            <label>Spacing:</label>
+            <input type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+            <label>Blur:</label>
+            <input type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+            <label>Base Color:</label>
+            <input class="colorPanel" type="color" name="base" value="#FFc600">
+        </div>
+        <img src="img/Img02.jpg" />
+
+    <script>
+        const inputs = document.querySelectorAll('.nav input');
+        function handleUpdate(){
+            const suffix = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+           
+        }
+        inputs.forEach(input => input.addEventListener('change', handleUpdate));
+        inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+    </script>
+
+
+    </body>
+
+
+
+</html>

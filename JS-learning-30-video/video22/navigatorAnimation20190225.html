@@ -1,0 +1,51 @@
+<!DOCTYPE >
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>navigator Tag animation</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <nav>
+            <ul class="menu">
+                <li><a href="">Home</a></li>
+                <li><a href="">Order Status</a></li>
+                <li><a href="">Tweets</a></li>
+                <li><a href="">Read our History</a></li>
+                <li><a href="">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="wrapper">
+            <p>Lorem ipsum <a href="">dolor</a> sit amet, <a href="">consectetur</a> adipisicing elit. Est explicabo unde natus necessitatibus esse obcaecati distinctio, aut itaque, qui vitae!</p>
+            <p>Aspernatur sapiente <a href="">aquae></a> sint soluta modi, atque praesentium laborum pariatur earum quaerat cupiditate consequuntur facilis ullam dignissimos, aperiam quam veniam.</p>
+            <p>Cum ipsam quod, incidunt sit ex tempore placeat maxime corrupti possimus veritatis ipsum fugit recusandae est doloremque? Hic, quibusdam, nulla.</p>
+            <p>Esse quibusdam, ad, ducimus cupiditate nulla, quae magni odit totam ut consequatur eveniet sunt quam provident sapiente dicta neque quod.</p>
+            <p>Aliquam <a href="">dicta</a> sequi culpa fugiat consequuntur pariatur optio ad minima, maxime odio, distinctio magni impedit tempore enim repellendus repudiandae quas!</p>
+        </div>
+
+        <script>
+            const triggers = document.querySelectorAll("a");
+            const highlight = document.createElement("span");
+            highlight.classList.add("highlight");
+            document.body.appendChild(highlight);
+
+            function hLink() {
+                const linkCoords = this.getBoundingClientRect();
+                
+                
+                const coords = {
+                    width: linkCoords.width,
+                    height: linkCoords.height,
+                    left: linkCoords.left + window.scrollX,
+                    top: linkCoords.top + window.scrollY
+                }
+                highlight.style.width = `${coords.width}px`;
+                highlight.style.height = `${coords.height}px`;
+                highlight.style.transform = `translate(${coords.left}px,${coords.top}px)`;
+            }
+
+            triggers.forEach(a => a.addEventListener('mouseenter',hLink));
+        
+        </script>
+    </body>
+</html>

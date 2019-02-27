@@ -1,0 +1,129 @@
+<!DOCTYPE >
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Hold shift && check checkBoxes</title>
+    </head>
+    <body>
+        <style>/*part1*/
+            html {
+                background: #ffc600;
+            }
+            body {
+                margin: 8px;
+                display: flex;
+                justify-content: center;
+                
+                
+            }
+
+            .emailList {
+                margin: 42px;
+                border-radius: 5px;
+                background: white;
+                width: 400px;
+                box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+            }
+
+            .item {
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid #EEE;
+            }
+
+            .item:last-child {
+                border-bottom: none;
+            }
+
+            input {
+                margin: 20px;
+            }
+
+            input:checked + p{                      /*+*/
+                background: #F9f9f9;
+                text-decoration:line-through;
+            }
+            p {
+                margin: 0;
+                padding: 20px;
+                font-size: 20px;
+                font-weight: 200;
+                flex: 1;
+                border-left: 1px solid #D1E2FF;
+                transition: background .2s;
+                
+            }
+
+        </style>
+
+        <!--part2-->
+        <div class="emailList">
+            <div class="item">
+                <input type="checkbox">
+                <p>This is an inbox layout.</p>
+            </div>
+            <div class="item">
+                <input type="checkbox">
+                <p>check one item</p>
+            </div>
+            <div class="item">
+                <input type="checkbox">
+                <p>check one item</p>
+            </div>
+            <div class="item">
+                <input type="checkbox">
+                <p>check one item</p>
+            </div>
+            <div class="item">
+                <input type="checkbox">
+                <p>check one item</p>
+            </div>
+            <div class="item">
+                <input type="checkbox">
+                <p>check one item</p>
+            </div>
+            <div class="item">
+                <input type="checkbox">
+                <p>check one item</p>
+            </div>
+            <div class="item">
+                <input type="checkbox">
+                <p>check one item</p>
+            </div>
+            <div class="item">
+                <input type="checkbox">
+                <p>check one item</p>
+            </div>
+            <div class="item">
+                <input type="checkbox">
+                <p>check one item</p>
+            </div>
+        </div>
+
+        <script>/*part3*/
+        
+        let lastChecked;
+        let onOff = false;
+
+        function handleCheck(e) {
+            if (!lastChecked) lastChecked = this;//对于第一个初始页面时，last就等于当前
+            onOff = lastChecked.checked ? true:false;//checked本身是一个 checked 的属性值，而非布尔值
+            if(e.shiftKey){
+                let start = boxArr.indexOf(this);
+                let end = boxArr.indexOf(lastChecked);
+                boxArr.slice(Math.min(start,end),Math.max(start,end)+1).forEach(//这个是循环遍历区间内数组，更新 checked 属性
+                    input => input.checked = onOff);//中间的元素都是依据 last 的 checked 属性
+                    console.log(start+ "+" + end);
+            }
+            lastChecked =this;//将当前赋值为last，已用于下一轮循环输出，相当于计数的变量，不管是否按下shift，每次单击一次box，都重新更新一次 Last checkbox 含有 check 属性
+        }
+
+        const checkBoxes = document.querySelectorAll('.emailList input[type=checkbox]');
+        const boxArr = Array.from(checkBoxes);
+
+        
+        checkBoxes.forEach(checkbox => {
+            checkbox.addEventListener('click',handleCheck)});//这个是为了遍历监听checkBox
+        </script>
+    </body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE >
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>JavaScript References</title>
+    </head>
+    <body>
+        <script>
+        //strings , number, boolean
+        let age = 100;
+        let age2 = age;
+        age2 = 20;
+        console.log(age,age2);
+
+        let name = 'kyra';
+        let biMing = name;
+        biMing = 'newLeaf';
+        console.log(biMing, name);
+
+        let love = true;
+        let hate = love;
+        hate = false;
+        console.log(love,hate);
+
+        // 1.array,const 并非传值，浅拷贝，数组引用🚰
+        const players = ['ellen','deGeneres','richard','kyra'];
+        const arr = players;
+        arr[3] = 'michel';
+        console.log(arr,players);   
+
+        //copy 其他方法,slice
+        const arr01 = players.slice();
+        arr01[3] = 'alisa';
+        console.log(arr01,players);
+
+        //copy 其他方法,concat
+        const arr02 = [].concat(players);
+        arr02[3] = 'alisa';
+        console.log(arr02,players);
+
+        //copy 其他方法,spread ...
+        const arr03 = [...players];
+        arr03[3] = 'alisa';
+        console.log(arr03,players);
+
+        //copy 其他方法,array.from
+        const arr04 = Array.from(players);
+        arr04[3] = 'alisa';
+        console.log(arr04,players);
+
+        // 2. Object copy
+        const person = {
+            name: 'wes',
+            age: 80,
+        };
+
+        // assign
+        const p01 = Object.assign({},person,{number:01,age:101});
+        console.log(person,p01);
+
+        // object spread
+        const p02 = {...person};
+        p02.age = 120;
+        console.log(person,p02);
+
+        // 3. twice deepCopy or not,对象属性值为对象时，该属性对象为浅拷贝
+
+        const wes = {
+            name: 'wesbos',
+            age: 80,
+            social: {
+                twitter: '@wesb',
+                facebook: 'dev', 
+            }
+        }
+
+        console.clear();
+
+        const p03 = Object.assign({},wes);
+        p03.social.twitter = '@twitter.wes';
+        console.log(wes,p03);
+
+        // 3. 属性值对象的深拷贝,JSON
+        const p04 = JSON.parse(JSON.stringify(wes));
+        p04.social.twitter = '@novark.wes';
+        console.log(wes,p04);
+
+
+        
+        </script>
+    </body>
+</html>

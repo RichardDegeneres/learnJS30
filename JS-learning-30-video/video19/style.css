@@ -1,0 +1,42 @@
+html {
+  font-size: 10px;
+  background: #ffc600;
+}
+body {
+  margin: 24px 8px;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+.photobooth {
+  background: white;
+  border-radius: 2px;
+  margin: 2rem auto;
+  max-width: 150rem;
+  height: 500px;
+}
+.photo {
+  display: block;
+  float: left;
+  width: 100%;
+  border: black 1px solid;
+  height: 480px;
+}
+.player {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 200px;
+  border: #2bbb62 1px solid;
+}
+.strip {
+  padding: 2rem;
+}
+.strip img {
+  background: white;
+  width: 100px;
+  padding: .8rem .8rem 2.5rem .8rem;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE >
+<html>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Ajax Type with fetch</title>
+        <link rel="stylesheet" href="style20190128.css">
+    </head>
+    <body>
+
+        <form class="search-form">
+            <input type="text" class="search" placeholder="City or State"/>
+            <ul class="suggestions">
+                <li>City</li>
+                <li>State</li>
+            </ul>
+        </form>
+    
+    <script>
+        const endpoint="https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+        //fetch a new API in the browser,instead of ajax;
+
+        //1.first, new a Empty Array to store the data;
+        const cities = [];
+        //Method: fetch(),return promise not data;
+        //const prom = fetch(endpoint);
+        //console.log(prom);
+        // fetch then 方法，用于将各个处理器连接起来，可以 一直.then(function(){}).then(function(){})....
+        
+        //2. 抓取数据
+        //由于原始返回数据类型为 blob,此时返回为 Response 
+        //fetch(endpoint).then(blob => console.log(blob));
+        //所以 使用json()方法，转换后使用，此时返回为 Array
+        fetch(endpoint).then(blob => blob.json()).then(data => console.log(data));
+
+        //3. 将获取到的数据 data 转存到 常量数组 cities 中，采用 push 方法，或者定义let/var变量数组，可直接 = 复制
+        //...的标识，可将数组一一对应赋值，而非整体赋值一次 
+        fetch(endpoint).then(blob => blob.json()).then(data => cities.push(...data));
+        
+        //4. 接下来从功能function上考虑如何处理数据
+
+        //4-1. 功能1：通过键盘输入，筛选匹配项， filter（）方法，match方法（），regExg 正则化筛选条件
+        function findMatches(keyInput,cities) {
+            
+            return cities.filter(place => {
+                const reg = new RegExp(keyInput, 'gi');
+                return place.city.match(reg) || place.state.match(reg)
+            });
+        };
+
+        //4-2. 功能2: 监听特定元素/标签的输入，DOM 对象的处理，实现对不同输入的检测
+        //先暂时定义一个空函数，console this 的方法，仅检测键盘输入，暂不进行处理
+        //此时，只要有按键按下，就会在 console 检测到
+        function displayMatches(){
+            //console.log(this.value);
+
+        //4-3. 功能3: 接口，将键盘输入 送到 匹配筛选
+            const getArray = findMatches(this.value, cities);
+            //console.log(getArray); 
+        
+        //4-4. 功能4: 添加到html页面显示，map()方法
+            const html = getArray.map(place => {
+
+                //5-2. 高亮标识匹配项， replace（）方法+regExp 正则条件
+                const regex = new RegExp(this.value, 'gi');
+                const cityName = place.city.replace(regex, `<span class="matchItems" >${this.value}</span>`);//5-2
+                const stateName = place.state.replace(regex, `<span class="matchItems" >${this.value}</span>`);//5-2
+
+                return `<li><span class="matchList">${cityName}, ${stateName}</span>
+                <span class="numberList">${number(place.population)}</span></li>
+                `;
+
+        //5.考虑显示的样式问题        
+            }).join('');//5-1
+            const suggestions = document.querySelector(".suggestions");//4-4
+            suggestions.innerHTML = html;
+        }
+
+        //5-3. 数字的显示格式
+        function number(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');
+        }
+
+        const searchInput = document.querySelector(".search");//4-2
+        searchInput.addEventListener("change", displayMatches);//4-2
+        searchInput.addEventListener("keyup", displayMatches);//4-2
+
+
+    </script>
+    </body>
+</html>

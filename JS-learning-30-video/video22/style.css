@@ -1,0 +1,43 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-size: sans-serif;
+  background: linear-gradient(45deg, #ff1a66 0%, rgba(255, 26, 102, 0) 70%), linear-gradient(135deg, #4306f9 10%, rgba(67, 6, 249, 0) 80%), linear-gradient(225deg, #0df259 10%, rgba(13, 242, 89, 0) 80%), linear-gradient(315deg, #f99e1f 100%, rgba(249, 158, 31, 0) 70%);
+}
+.menu {
+  margin: 100px 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+.menu a {
+  display: inline-block;
+  padding: 5px;
+  margin: 0 20px;
+}
+a {
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  color: black;
+}
+.wrapper {
+  margin: 0 auto;
+  max-width: 500px;
+  font-size: 20px;
+  line-height: 2;
+  position: relative;
+}
+.highlight {
+  background: white;
+  transition: all .2s;
+  border-bottom: 2px solid white;
+  border-radius: 20px;
+  display: block;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}

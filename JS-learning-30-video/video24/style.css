@@ -1,0 +1,79 @@
+html {
+  box-sizing: border-box;
+  background: #eee;
+  font-weight: 200;
+  font-size: 20px;
+  font-family: 'helvetica neue';
+}
+body,
+html,
+p div,
+h1,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+header {
+  height: 50vh;
+  text-align: center;
+  background: url(https://tse1-mm.cn.bing.net/th?id=OIP.l9LQeLHb-U3vR0uguC0GcQHaG-&w=107&h=105&c=8&rs=1&qlt=90&dpr=2&pid=3.1&rm=2) center no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+h1 {
+  color: white;
+  font-size: 7vw;
+  font-weight: bold;
+  text-shadow: 3px 4px 0 #666;
+}
+.fixedNav nav {
+  position: fixed;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.1);
+  top: 0;
+  width: 100%;
+}
+.fixedNav nav li.logo {
+  background: white;
+  max-width: 500px;
+  color: black;
+  font-weight: 600;
+}
+nav {
+  z-index: 1;
+}
+ul {
+  background: black;
+  display: flex;
+  list-style: none;
+  color: white;
+}
+ul li {
+  padding: 1.2em 0;
+  flex: 1;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+ul li.logo {
+  max-width: 0;
+  overflow: hidden;
+  transition: all .5s;
+}
+.site-wrap {
+  width: 600px;
+  margin: 120px auto;
+  background: white;
+  padding: 40px;
+  text-align: justify;
+  box-shadow: 0 0 10px 5px #DDD;
+  word-break: break-all;
+  transform: scale(0.98);
+  transition: transform 0.5s;
+}
+.fixedNav .site-wrap {
+  transform: scale(1);
+}
