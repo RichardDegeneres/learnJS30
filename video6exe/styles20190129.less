@@ -1,0 +1,67 @@
+ul,p,div,li {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: #DBDBDB;
+    padding: 15px;
+    margin: 0;
+}
+
+.todoApp {
+    padding: 15px;
+    background: linear-gradient(#fbf 0%, rgb(170, 200, 255) 100%);
+    border: 1px solid rgb(170, 200, 255);
+    border-radius: 5px;
+    font-size: 20px;
+    .addToDo {
+        
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .addTodoText {
+            width: 80%;
+        }
+        input {
+            height: 30px;
+            border-radius: 5px;
+        } 
+        .submit{
+            font-size: 15px;
+        }   
+    }
+
+    .toDoHeadline{
+        border-bottom: 1px solid white;
+        padding-bottom: 50px;
+    }
+
+    .toDo {
+        border-bottom: 1px solid white;
+        padding-bottom: 40px;
+    }
+
+    .done {
+        padding-bottom: 20px;
+        p {
+            text-decoration: line-through;
+        }
+    }
+
+    .search{
+        width: 80%;
+        height: 30px;
+        margin-left: 10px;
+        border-radius: 5px;
+    }
+
+}
+
+.hl {
+    background: rgb(229, 255, 0);
+    color: wheat;
+}
+
+

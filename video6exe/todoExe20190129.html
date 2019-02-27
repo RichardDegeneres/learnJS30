@@ -1,0 +1,164 @@
+<!DOCTYPE >
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles20190129.css">
+    </head>
+    <body>
+        <div class= "todoApp">
+
+            <div class="addToDo">
+                <label >Add To-Do:</label>
+                <input type="text"  class="addTodoText" placeholder="I want to...">
+                <input type="submit"  class="submit" value="确定"> 
+            </div>
+            <div class="toDoHeadline">
+                <label >Search To-Do:</label>
+                <input type="text"  class="search" placeholder="search...">
+            </div>   
+            <div>TodoList:</div>
+            <div class="toDo">
+                
+
+            </div>
+            <div>FinishedList:</div>
+            <div class= "done">
+
+            </div>
+
+        </div>
+
+        <script>
+        let inputText;
+        let listArr = [];
+        //1.监听 addToDo 的文本输入框，“change“，”keyup“
+        function addContent(){
+            
+            inputText = this.value;
+            console.log('inputText', inputText);
+            return inputText;
+        }
+        const getInput = document.querySelector(".addToDoText");
+        getInput.addEventListener('change', addContent);
+        getInput.addEventListener('keyup', addContent);
+
+        //2. 写入todo 的功能实现
+        function writingToDo(obj){
+            
+            // obj.innerHTML = '';
+            // listArr.forEach(item => {
+            //     console.log('item', item)
+            //     //innerHTML是赋值为文本，所以可以通过，而append所实现的时逐层添加，不能同时加入，否则会被当成文本，通过JQuery替换使用
+            //     const P = document.createElement('P')//1.此时创建了一个元素/也就是节点
+            //     P.innerHTML = `<input type="checkbox" class="listP" data-id="${item.index}">${item.text}`//2.通过innerHTML赋值
+            //     console.log(P,'p')
+            //     obj.append(P);//3.最后将p封装好后再，通过append实现，附加的功能
+            //     console.log(obj,"===================");
+            //     //直接使用append进行带标签元素添加是不可以的，需要通过node的方式
+            // })
+            
+            const html2 = listArr.map( item => {
+                return `<p><input type="checkbox" class="listP" data-id="${item.index}">${item.text}</p> `;
+            }).join('');
+            obj.innerHTML = html2;
+
+
+
+            //5. 监听checkbox函数，复选框是否被选中,实现删除功能
+            const boxes = document.querySelectorAll('.toDo input[type="checkbox"]');
+            boxes.forEach(box => box.addEventListener('click',del));
+            //出现的问题，在监听过程中的函数调用，只添加函数名，不加（）执行体的部分，否则会出现undefined的情况
+            //checkbox 可通过 click 的方法进行监听,对整体/即所有的checkbox 都进行监听
+        }
+        const todoList = document.querySelector(".toDo");
+
+        //3.监听 button 按钮，”click“
+        function display(){
+            //4. 设计接口，display
+            listArr.push({index: listArr.length, text: inputText})
+            console.log(listArr, 'listArr')
+            writingToDo(todoList);
+        }
+
+        const btn = document.querySelector(".submit");
+        btn.addEventListener('click', display);
+        
+        //5. 删除数组处理
+        //5-1 执行的第一步骤处理，先在toDo中删除改行
+        function del() {   
+            //console.log('checked', this.checked);
+            //删除DOM p标签,添加到done栏中
+            if(this.checked){
+                
+                //5-2 delete
+                let self = this;
+
+                const index = this.dataset.id;
+
+                listArr.splice(index,1);
+
+                console.log('listArrSplice', listArr)
+
+                console.log('checked', self.checked);
+                let parent =self.parentElement;
+                let parent2=parent.parentElement;
+                console.log('parent2_before', parent2);
+                parent2.removeChild(parent);//被删除的 parent 仍保存在内存中,仍可使用
+                console.log('parent2_after', parent2);
+
+                //5-3 add to done/finished 
+                const finishedList = document.querySelector(".done");
+                console.log('finished', finishedList);
+                console.log('childFinished', self);
+                let finishedChild = parent;
+                finishedList.append(finishedChild);
+            }
+            //5-4 修改样式，css即可实现    
+        }
+
+        //4. 查找功能
+        //4-1 查找的数据源/对象 todoList
+        //4-3 匹配函数
+        function findMatch(keyInput) {
+            console.log(keyInput.length, 'length')
+            // if(keyInput.length === 0) {  //根据情况判断是否需要
+            //     writingToDo(todoList);
+            //     return
+            // }
+            return listArr.filter(item => {
+                const reg = new RegExp(keyInput,'gi');
+                return item.text.match(reg)
+            })
+        }
+           
+        function displayMatches() {
+            console.log('displayMatches', this.value);
+            const matchArray = findMatch(this.value);
+            console.log(matchArray, 'matchArray')
+            //筛选出匹配的p
+
+            // todoList.innerHTML = '';
+            const html = matchArray.map(item => {
+                console.log(item, 'item')
+                const reg = new RegExp(this.value,'gi');
+                const getMatches =item.text.replace(reg,`<span class="hl">${this.value}</span>`);
+                console.log('Matches', getMatches);
+                return `<p><input type="checkbox" class="listP" data-id="${item.index}">${getMatches}</P>`;
+                // const P = document.createElement('P');
+                // P.innerHTML = `<input type="checkbox" class="listP">${getMatches}`;
+                // todoList.append(P);//方法2.比较复杂
+               
+            }).join('');//方法1.比较灵活
+            todoList.innerHTML = html;
+        }
+        //4-2 监听搜索输入框
+        const search = document.querySelector(".search");
+        search.addEventListener('change', displayMatches);
+        search.addEventListener('keyup', displayMatches);
+
+        
+       
+
+        </script>
+    </body>
+</html>
